@@ -9,6 +9,8 @@ right_arrow = _ ">" _
 quotation = _ '"' _
 equal = _ "=" _
 backslash = _ "/" _
+begin_cdata = _ "<![CDATA[" _
+end_cdata = _ "]]>"
 
 
 ATOM_text
@@ -18,7 +20,7 @@ ATOM_text
 
 
 value
-  = Multi / LINE / Content
+  = Multi / Line / Cdata / Content
 
 
 Multi
@@ -71,12 +73,11 @@ EndTag "ENDTAG"
      { return TagName }
 
 
-LINE "LINE"
+Line "LINE"
   = left_arrow 
     key:TagName
     _
-    members:
-    (
+    members:(
       head:keyword
       tail:(_ m:keyword { return m; })*
       {
@@ -90,6 +91,20 @@ LINE "LINE"
     }
 
 
+// /x3C "<![CDATA[" /\x3C\x3C\3E/ TODO: 匹配 <![CDATA[ 和 ]]> 之间的内容 =.=
+Cdata "CDATA"
+  = begin_cdata
+    chars:char*
+    end_cdata
+    {
+      return { content: chars.join('') }
+    }
+
+
+Content "CONTENT" 
+  =  chars: [^<]+ { return { content: chars.join('') } }
+
+
 keyword
   = name:TagName
     equal 
@@ -99,8 +114,6 @@ keyword
     }
 
 
-// Todo
-Content "CONTENT" =  chars: [^<]+ { return { content: chars.join('') } }
 TagName = chars:[a-zA-Z_]+ { return chars.join(""); }
 TagText = chars:[^<]+ { return chars.join(""); }
 

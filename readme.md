@@ -18,6 +18,10 @@
 <id>https://ruiming.github.io/2016/10/14/关于前后端分离鉴权的思考/</id>
 <published>2016-10-14T11:29:05.000Z</published>
 <updated>2016-10-14T11:54:55.587Z</updated>
+<content type="html">
+<![CDATA[
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"> <span class="attr">"alg"</span>: <span class="string">"HS256"</span>,</div><div class="line"> <span class="attr">"typ"</span>: <span class="string">"JWT"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]>
 </entry>
 </feed>
 ```
@@ -43,7 +47,12 @@
          "title": "关于前后端分离鉴权的思考",
          "id": "https://ruiming.github.io/2016/10/14/关于前后端分离鉴权的思考/",
          "published": "2016-10-14T11:29:05.000Z",
-         "updated": "2016-10-14T11:54:55.587Z"
+         "updated": "2016-10-14T11:54:55.587Z",
+         "content": {
+            "type": "html",
+            "content": "<figure class=\"highlight json\"><table><tr><td class=\"gutter\"><pre><div class=\"line\">1</div><div class=\"line\">2</div><div class=\"line\">3</div><div class=\"line\">4</div></pre></td><td class=\"code\"><pre><div class=\"line\">&#123;</div><div class=\"line\"> <span class=\"attr\">\"alg\"</span>: <span class=\"string\">\"HS256\"</span>,</div><div class=\"line\"> <span class=\"attr\">\"typ\"</span>: <span class=\"string\">\"JWT\"</span></div><div class=\"line\">&#125;</div></pre></td></tr></table></figure>
+"
+         }
       }
    }
 }

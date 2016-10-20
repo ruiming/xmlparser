@@ -10,7 +10,7 @@ quotation = _ '"' _
 equal = _ "=" _
 backslash = _ "/" _
 begin_cdata = _ "<![CDATA[" _
-end_cdata = _ "]]>"
+end_cdata = _ "]]>" _
 
 
 ATOM_text
@@ -91,20 +91,25 @@ Line "LINE"
     }
 
 
-// /x3C "<![CDATA[" /\x3C\x3C\3E/ TODO: 匹配 <![CDATA[ 和 ]]> 之间的内容 =.=
+// Match CDATA
 Cdata "CDATA"
   = begin_cdata
-    chars:char*
+    text:CdataText
     end_cdata
-    {
-      return { content: chars.join('') }
-    }
+    { return { content: text.join('') } }
 
 
-Content "CONTENT" 
-  =  chars: [^<]+ { return { content: chars.join('') } }
+CdataText
+  = x:(&(. (!"]]>" .)* "]]>").)* { return x.map(y => y[1])}
 
 
+// Match Content(no CDATA)
+Content "CONTENT"
+  = text: [^<]+
+    { return { content: text.join('') } }
+
+
+// Match keyword like a="b"
 keyword
   = name:TagName
     equal 
@@ -114,8 +119,9 @@ keyword
     }
 
 
-TagName = chars:[a-zA-Z_]+ { return chars.join(""); }
-TagText = chars:[^<]+ { return chars.join(""); }
+// Match TagName and TagValue
+TagName = chars:[a-zA-Z_:?]+ { return chars.join('').replace(/:/g, '-').replace(/\?/, '') }
+TagValue = chars:[^<]+ { return chars.join(""); }
 
 
 // string & char

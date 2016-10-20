@@ -1,5 +1,20 @@
 // Atom only now...
-// TODO: 覆盖问题和空标签问题
+{
+  // concat({c: 1, d: 2}, {d: 3}) => {c:1, d: [2, 3]} 
+  function concat(a, b) {
+    console.log(a, b);
+    for(let key of Object.keys(b)) {
+      if(a.hasOwnProperty(key)) {
+        if(!Array.isArray(a[key]))  a[key] = [a[key]];
+        a[key] = a[key].concat(b[key]);
+      } else {
+        a = Object.assign(a, {[key]: b[key]});
+      }
+    }
+    return a;
+  }
+}
+
 
 ATOM
   = _ value:value _ { return value; }
@@ -59,14 +74,15 @@ Multi
       tail:atom* {
         return [head].concat(tail);
       }
-    )
+    )?
     EndTag:EndTag {
       if(Object.keys(StartTag)[0] !== EndTag) {
         throw new Error(`StartTag ${StartTag[0]} no equal to EndTag ${EndTag}`);
       }
       // TODO 覆盖问题
       if(StartTag[EndTag]) {
-        content.reduce((prev, curr) => Object.assign(prev, curr), StartTag[EndTag]);
+        if(content === null)  StartTag[EndTag].content = '';
+        else  content.reduce((prev, curr) => concat(prev, curr), StartTag[EndTag]);
         return StartTag;
       } else {
         // TODO content 冲突问题
@@ -134,9 +150,7 @@ CdataText
 
 // Match Content(no CDATA)
 Content "CONTENT"
-  = text: [^<]+
-    { return { content: text.join('') } }
-
+  = text: [^<]+ { return { content: text.join('') } }
 
 // Match keyword like a="b"
 keyword

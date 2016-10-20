@@ -1,8 +1,8 @@
 // Atom only now...
+// TODO CDATA 问题
 {
   // concat({c: 1, d: 2}, {d: 3}) => {c:1, d: [2, 3]} 
   function concat(a, b) {
-    console.log(a, b);
     for(let key of Object.keys(b)) {
       if(a.hasOwnProperty(key)) {
         if(!Array.isArray(a[key]))  a[key] = [a[key]];
@@ -81,13 +81,14 @@ Multi
       }
       // TODO 覆盖问题
       if(StartTag[EndTag]) {
-        if(content === null)  StartTag[EndTag].content = '';
-        else  content.reduce((prev, curr) => concat(prev, curr), StartTag[EndTag]);
+        if(content === null)  StartTag[EndTag].value = '';
+        else  {
+          content.reduce((prev, curr) => concat(prev, curr), StartTag[EndTag]);
+        }
         return StartTag;
       } else {
-        // TODO content 冲突问题
-        if(content.length === 1 && Object.keys(content[0]).toString() === 'content')  return {[EndTag]: content[0].content};
-        return {[EndTag]:  content.reduce((prev, curr) => Object.assign(prev, curr))};
+        if(content.length === 1 && Object.keys(content[0]).toString() === 'value')  return {[EndTag]: content[0].value};
+        return {[EndTag]:  content.reduce((prev, curr) => concat(prev, curr))};
       }
     }
 
@@ -126,7 +127,7 @@ Line "LINE"
       head:keyword
       tail:(_ m:keyword { return m; })*
       {
-        return [head].concat(tail).reduce((prev, curr) => Object.assign(prev, curr));
+        return [head].concat(tail).reduce((prev, curr) => concat(prev, curr));
       }
     )?
     backslash
@@ -141,16 +142,17 @@ Cdata "CDATA"
   = begin_cdata
     text:CdataText
     end_cdata
-    { return { content: text.join('') } }
+    { return { value: text.join('') } }
 
 
+// TODO 这里的匹配有问题!!!
 CdataText
   = x:(&(. (!"]]>" .)* "]]>").)* { return x.map(y => y[1])}
 
 
 // Match Content(no CDATA)
 Content "CONTENT"
-  = text: [^<]+ { return { content: text.join('') } }
+  = text: [^<]+ { return { value: text.join('') } }
 
 // Match keyword like a="b"
 keyword

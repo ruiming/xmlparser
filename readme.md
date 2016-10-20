@@ -7,28 +7,31 @@
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title type="text">博客园_Franky</title>
-  <subtitle type="text">123</subtitle>
-  <id>uuid:4ca0426d-fc98-4b4b-82b3-37062b1deafb;id=4346</id>
-  <updated>2016-07-07T09:23:36Z</updated>
+  <title>Ruiming&#39;s Blog</title>
+  <link href="/atom.xml" rel="self"/>
+  <link href="https://ruiming.github.io/"/>
+  <updated>2016-10-14T11:54:55.587Z</updated>
+  <id>https://ruiming.github.io/</id>
   <author>
-    <name>Franky</name>
-    <uri>http://www.cnblogs.com/_franky/</uri>
+    <name>Ruiming</name>
+    <email>ruiming.zhuang@gmail.com</email>
   </author>
-  <generator>feed.cnblogs.com</generator>
+  <generator uri="http://hexo.io/">Hexo</generator>
   <entry>
-    <id>http://www.cnblogs.com/_franky/archive/2012/12/13/2815624.html</id>
-    <title type="text">从ES5 的 函数声明与函数表达式说起. - Franky</title>
-    <summary type="text">我们先从阿灰 的蛋疼的例子开始.demo1： function test() { var x = 1; with ({x: 2}) { eval('function foo() { console.log(x); }'); eval('var bar = function() { console.l...</summary>
-    <published>2012-12-12T17:16:00Z</published>
-    <updated>2012-12-12T17:16:00Z</updated>
-    <author>
-      <name>Franky</name>
-      <uri>http://www.cnblogs.com/_franky/</uri>
-    </author>
-    <link rel="alternate" href="http://www.cnblogs.com/_franky/archive/2012/12/13/2815624.html" />
-    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/_franky/archive/2012/12/13/2815624.html" />
-    <content type="html">【摘要】我们先从阿灰 的蛋疼的例子开始.demo1： function test() { var x = 1; with ({x: 2}) { eval('function foo() { console.log(x); }'); eval('var bar = function() { console.l... &lt;a href="http://www.cnblogs.com/_franky/archive/2012/12/13/2815624.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+    <title>关于前后端分离鉴权的思考</title>
+    <link href="https://ruiming.github.io/2016/10/14/%E5%85%B3%E4%BA%8E%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%89%B4%E6%9D%83%E7%9A%84%E6%80%9D%E8%80%83/"/>
+    <id>https://ruiming.github.io/2016/10/14/关于前后端分离鉴权的思考/</id>
+    <published>2016-10-14T11:29:05.000Z</published>
+    <updated>2016-10-14T11:54:55.587Z</updated>
+    <content type="html"><![CDATA[<p>123456</p><a href="https://ruiming.github.io">Test</a>]]></content>
+    <summary type="html">
+      &lt;p&gt;前后端分离项目的 Token 存储问题由来已久，有的人存 Cookie 有的人存 LocalStorage 或 SessionStorage，最近刚把 RSS 订阅器项目的鉴权问题做好，感觉算是目前比较稳妥安全的方案了，分享一下经验。&lt;/p&gt;
+    </summary>
+      <category term="安全" scheme="https://ruiming.github.io/categories/%E5%AE%89%E5%85%A8/"/>
+      <category term="Angular" scheme="https://ruiming.github.io/tags/Angular/"/>
+      <category term="JavaScript" scheme="https://ruiming.github.io/tags/JavaScript/"/>
+      <category term="JWT" scheme="https://ruiming.github.io/tags/JWT/"/>
+      <category term="Koa" scheme="https://ruiming.github.io/tags/Koa/"/>
   </entry>
 </feed>
 ```
@@ -41,46 +44,65 @@
    "encoding": "utf-8",
    "feed": {
       "xmlns": "http://www.w3.org/2005/Atom",
-      "title": {
-         "type": "text",
-         "content": "博客园_Franky"
-      },
-      "subtitle": {
-         "type": "text",
-         "content": "123"
-      },
-      "id": "uuid:4ca0426d-fc98-4b4b-82b3-37062b1deafb;id=4346",
-      "updated": "2016-07-07T09:23:36Z",
+      "title": "Ruiming&#39;s Blog",
+      "link": [
+         {
+            "href": "/atom.xml",
+            "rel": "self"
+         },
+         {
+            "href": "https://ruiming.github.io/"
+         }
+      ],
+      "updated": "2016-10-14T11:54:55.587Z",
+      "id": "https://ruiming.github.io/",
       "author": {
-         "name": "Franky",
-         "uri": "http://www.cnblogs.com/_franky/"
+         "name": "Ruiming",
+         "email": "ruiming.zhuang@gmail.com"
       },
-      "generator": "feed.cnblogs.com",
+      "generator": {
+         "uri": "http://hexo.io/",
+         "value": "Hexo"
+      },
       "entry": {
-         "id": "http://www.cnblogs.com/_franky/archive/2012/12/13/2815624.html",
-         "title": {
-            "type": "text",
-            "content": "从ES5 的 函数声明与函数表达式说起. - Franky"
-         },
-         "summary": {
-            "type": "text",
-            "content": "我们先从阿灰 的蛋疼的例子开始.demo1： function test() { var x = 1; with ({x: 2}) { eval('function foo() { console.log(x); }'); eval('var bar = function() { console.l..."
-         },
-         "published": "2012-12-12T17:16:00Z",
-         "updated": "2012-12-12T17:16:00Z",
-         "author": {
-            "name": "Franky",
-            "uri": "http://www.cnblogs.com/_franky/"
-         },
+         "title": "关于前后端分离鉴权的思考",
          "link": {
-            "rel": "alternate",
-            "type": "text/html",
-            "href": "http://www.cnblogs.com/_franky/archive/2012/12/13/2815624.html"
+            "href": "https://ruiming.github.io/2016/10/14/%E5%85%B3%E4%BA%8E%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%89%B4%E6%9D%83%E7%9A%84%E6%80%9D%E8%80%83/"
          },
+         "id": "https://ruiming.github.io/2016/10/14/关于前后端分离鉴权的思考/",
+         "published": "2016-10-14T11:29:05.000Z",
+         "updated": "2016-10-14T11:54:55.587Z",
          "content": {
             "type": "html",
-            "content": "【摘要】我们先从阿灰 的蛋疼的例子开始.demo1： function test() { var x = 1; with ({x: 2}) { eval('function foo() { console.log(x); }'); eval('var bar = function() { console.l... &lt;a href=\"http://www.cnblogs.com/_franky/archive/2012/12/13/2815624.html\" target=\"_blank\"&gt;阅读全文&lt;/a&gt;"
-         }
+            "value": "<p>123456</p><a href=\"https://ruiming.github.io\">Test</a>"
+         },
+         "summary": {
+            "type": "html",
+            "value": "&lt;p&gt;前后端分离项目的 Token 存储问题由来已久，有的人存 Cookie 有的人存 LocalStorage 或 SessionStorage，最近刚把 RSS 订阅器项目的鉴权问题做好，感觉算是目前比较稳妥安全的方案了，分享一下经验。&lt;/p&gt;
+    "
+         },
+         "category": [
+            {
+               "term": "安全",
+               "scheme": "https://ruiming.github.io/categories/%E5%AE%89%E5%85%A8/"
+            },
+            {
+               "term": "Angular",
+               "scheme": "https://ruiming.github.io/tags/Angular/"
+            },
+            {
+               "term": "JavaScript",
+               "scheme": "https://ruiming.github.io/tags/JavaScript/"
+            },
+            {
+               "term": "JWT",
+               "scheme": "https://ruiming.github.io/tags/JWT/"
+            },
+            {
+               "term": "Koa",
+               "scheme": "https://ruiming.github.io/tags/Koa/"
+            }
+         ]
       }
    }
 }

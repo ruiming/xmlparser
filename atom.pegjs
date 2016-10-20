@@ -1,4 +1,5 @@
 // Atom only now...
+// TODO: 覆盖问题和空标签问题
 
 ATOM
   = _ value:value _ { return value; }
@@ -11,23 +12,51 @@ equal = _ "=" _
 backslash = _ "/" _
 begin_cdata = _ "<![CDATA[" _
 end_cdata = _ "]]>" _
-
+begin_xml = _ "<?xml" _
+end_xml = _ "?>" _
 
 ATOM_text
-  = _ value:value _ {
+  = 
+    _ value:value _ 
+    {
+      console.log(value);
       return value;
     }
 
 
 value
+  = head:head
+    atom:atom {
+      return Object.assign(head, atom);
+    }
+
+
+atom
   = Multi / Line / Cdata / Content
+
+
+// Start
+head
+  = begin_xml
+    members:
+    (
+      head:keyword
+      tail:(_ m:keyword { return m; })*
+      {
+        return [head].concat(tail).reduce((prev, curr) => Object.assign(prev, curr));
+      }
+    )
+    end_xml
+    {
+      return members;
+    }
 
 
 Multi
   = StartTag:StartTag
     content: (
-      head:value
-      tail:value* {
+      head:atom
+      tail:atom* {
         return [head].concat(tail);
       }
     )
@@ -113,15 +142,15 @@ Content "CONTENT"
 keyword
   = name:TagName
     equal 
-    value:string
+    atom:string
     {
-      return { [name]: value }
+      return { [name]: atom }
     }
 
 
-// Match TagName and TagValue
+// Match TagName and Tagatom
 TagName = chars:[a-zA-Z_:?]+ { return chars.join('').replace(/:/g, '-').replace(/\?/, '') }
-TagValue = chars:[^<]+ { return chars.join(""); }
+Tagatom = chars:[^<]+ { return chars.join(""); }
 
 
 // string & char

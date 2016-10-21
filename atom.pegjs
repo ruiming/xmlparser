@@ -1,5 +1,4 @@
 // Atom only now...
-// TODO CDATA 问题
 {
   // concat({c: 1, d: 2}, {d: 3}) => {c:1, d: [2, 3]} 
   function concat(a, b) {
@@ -150,7 +149,7 @@ Cdata "CDATA"
 // 匹配任意一个字符, 但当它是 "]" 时,后面两个字符不能是 "]>".
 // 匹配任意一个字符, 当他后面跟着 "]]>" 时, 匹配结束
 CdataText
-  = x:(!("]]>") .)* { console.log(x); return x.map(y => y[1]) }
+  = x:(!("]]>") .)* { return x.map(y => y[1]) }
 
 
 // Match Content(no CDATA)

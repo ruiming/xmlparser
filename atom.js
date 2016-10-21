@@ -212,7 +212,7 @@ function peg$parse(input, options) {
       peg$c36 = peg$otherExpectation("CDATA"),
       peg$c37 = function(text) { return { value: text.join('') } },
       peg$c38 = peg$anyExpectation(),
-      peg$c39 = function(x) { console.log(x); return x.map(y => y[1]) },
+      peg$c39 = function(x) { return x.map(y => y[1]) },
       peg$c40 = peg$otherExpectation("CONTENT"),
       peg$c41 = /^[^<]/,
       peg$c42 = peg$classExpectation(["<"], true, false),

@@ -145,9 +145,12 @@ Cdata "CDATA"
     { return { value: text.join('') } }
 
 
-// TODO 这里的匹配有问题!!!
+// CdataText
+//  = x:(&(. (!"]]>" .)* "]]>").)* { return x.map(y => y[1])}
+// 匹配任意一个字符, 但当它是 "]" 时,后面两个字符不能是 "]>".
+// 匹配任意一个字符, 当他后面跟着 "]]>" 时, 匹配结束
 CdataText
-  = x:(&(. (!"]]>" .)* "]]>").)* { return x.map(y => y[1])}
+  = x:(!("]]>") .)* { console.log(x); return x.map(y => y[1]) }
 
 
 // Match Content(no CDATA)

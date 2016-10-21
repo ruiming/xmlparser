@@ -6,18 +6,18 @@ A xmlparser parse xml-like data and turn it to a JavaScript Object.
 
 You can copy the code from the `atom.pegjs` to this website [http://pegjs.org/online](http://pegjs.org/online) to test online.
 
-I recommend not to used it in production now, for it is not tested enough as well as not finished yet..
+I recommend not to used it in production now, for it is not tested enough as well as not finished yet.
 
 
 ## Features
 
 - No overwrite
 
-  If there is more than one node which has the same key name, it will auto concat as a array and there is no overwrite problem.
+  If there is more than one node which has the same key name, it will auto be combined as an array and there is no overwrite problem.
 
 - Value within the tag
 
-  The html or text within the tag that has more than one attribute will be turn into a objecti like `{ value: xxx }`. For example, parse `<summary type="html">123</summary>` will returns `{ summary: { type: "html", "value": 123}}`. And If there is no attribute in the tag, for example `{<title>Ruiming&#39;s Blog</title>}` will returns `{ title: "Ruiming&#39;s Blog" }`.
+  The html or text within the tag that has more than one attribute will be turn into an object like `{ value: xxx }`. For example, parse `<summary type="html">123</summary>` will return `{ summary: { type: "html", "value": 123}}`. And If there is no attribute exists in the tag, for example `{<title>Ruiming&#39;s Blog</title>}` will return `{ title: "Ruiming&#39;s Blog" }`.
 
 - Based on PEG.js
 

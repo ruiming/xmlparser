@@ -1,9 +1,18 @@
-# 基于 PEG.js 的 XML 解析器
+# xmlparser
 
-目前支持遵循 Atom 规范的 XML 解析, 最终生成一个 JavaScript 对象.
-其他规范的解析还在施工中.
+A xmlparser parse xml-like data and turn it to a JavaScript Object.
 
-输入：
+## Usage
+
+You can copy the code from the `atom.pegjs` to this website [http://pegjs.org/online](http://pegjs.org/online) to test online.
+
+I recommend not to used it in production now, for it is not tested enought as well as not fininshed yet..
+
+## Example
+
+### Atom
+
+**input：**
 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -19,16 +28,13 @@
   </author>
   <generator uri="http://hexo.io/">Hexo</generator>
   <entry>
-    <title>关于前后端分离鉴权的思考</title>
-    <link href="https://ruiming.github.io/2016/10/14/%E5%85%B3%E4%BA%8E%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%89%B4%E6%9D%83%E7%9A%84%E6%80%9D%E8%80%83/"/>
-    <id>https://ruiming.github.io/2016/10/14/关于前后端分离鉴权的思考/</id>
+    <title>aaabbbccc</title>
+    <link href="https://ruiming.github.io/"/>
+    <id>https://ruiming.github.io/</id>
     <published>2016-10-14T11:29:05.000Z</published>
     <updated>2016-10-14T11:54:55.587Z</updated>
     <content type="html"><![CDATA[<p>123456</p><a href="https://ruiming.github.io">Test</a>]]></content>
-    <summary type="html">
-      &lt;p&gt;前后端分离项目的 Token 存储问题由来已久，有的人存 Cookie 有的人存 LocalStorage 或 SessionStorage，最近刚把 RSS 订阅器项目的鉴权问题做好，感觉算是目前比较稳妥安全的方案了，分享一下经验。&lt;/p&gt;
-    </summary>
-      <category term="安全" scheme="https://ruiming.github.io/categories/%E5%AE%89%E5%85%A8/"/>
+    <summary type="html">&lt;p&gt;TestTest&lt;/p&gt;</summary>
       <category term="Angular" scheme="https://ruiming.github.io/tags/Angular/"/>
       <category term="JavaScript" scheme="https://ruiming.github.io/tags/JavaScript/"/>
       <category term="JWT" scheme="https://ruiming.github.io/tags/JWT/"/>
@@ -37,7 +43,7 @@
 </feed>
 ```
 
-解析生成:
+**output:**
 
 ```json
 {
@@ -66,11 +72,11 @@
          "value": "Hexo"
       },
       "entry": {
-         "title": "关于前后端分离鉴权的思考",
+         "title": "aaabbbccc",
          "link": {
-            "href": "https://ruiming.github.io/2016/10/14/%E5%85%B3%E4%BA%8E%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%89%B4%E6%9D%83%E7%9A%84%E6%80%9D%E8%80%83/"
+            "href": "https://ruiming.github.io/"
          },
-         "id": "https://ruiming.github.io/2016/10/14/关于前后端分离鉴权的思考/",
+         "id": "https://ruiming.github.io/",
          "published": "2016-10-14T11:29:05.000Z",
          "updated": "2016-10-14T11:54:55.587Z",
          "content": {
@@ -79,14 +85,9 @@
          },
          "summary": {
             "type": "html",
-            "value": "&lt;p&gt;前后端分离项目的 Token 存储问题由来已久，有的人存 Cookie 有的人存 LocalStorage 或 SessionStorage，最近刚把 RSS 订阅器项目的鉴权问题做好，感觉算是目前比较稳妥安全的方案了，分享一下经验。&lt;/p&gt;
-    "
+            "value": "&lt;p&gt;TestTest&lt;/p&gt;"
          },
          "category": [
-            {
-               "term": "安全",
-               "scheme": "https://ruiming.github.io/categories/%E5%AE%89%E5%85%A8/"
-            },
             {
                "term": "Angular",
                "scheme": "https://ruiming.github.io/tags/Angular/"
@@ -102,6 +103,125 @@
             {
                "term": "Koa",
                "scheme": "https://ruiming.github.io/tags/Koa/"
+            }
+         ]
+      }
+   }
+}
+```
+
+### RSS
+
+**input:**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Web前端 腾讯AlloyTeam  Blog &#124; 愿景: 成为地球卓越的Web团队！</title>
+	<atom:link href="http://www.alloyteam.com/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.alloyteam.com</link>
+	<description>腾讯全端 AlloyTeam 团队 Blog</description>
+	<lastBuildDate>Fri, 21 Oct 2016 02:45:51 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.3.1</generator>
+	<item>
+		<title>你所需要知道的AC2016——倒数3天</title>
+		<link>http://www.alloyteam.com/2016/10/what-you-need-to-know-ac2016-the-last-3-days/</link>
+		<comments>http://www.alloyteam.com/2016/10/what-you-need-to-know-ac2016-the-last-3-days/#comments</comments>
+		<pubDate>Thu, 20 Oct 2016 12:36:53 +0000</pubDate>
+		<dc:creator><![CDATA[TAT.Johnny]]></dc:creator>
+				<category><![CDATA[团队]]></category>
+
+		<guid isPermaLink="false">http://www.alloyteam.com/?p=11383</guid>
+		<description><![CDATA[经过了前期踊跃的报名（已超过2000人报名），AC2016即将在10月23日盛大举行。什么，抢不到邀请码？别着 [&#8230;]]]></description>
+		<wfw:commentRss>http://www.alloyteam.com/2016/10/what-you-need-to-know-ac2016-the-last-3-days/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>AC2016讲师专访——郭林烁 joey</title>
+		<link>http://www.alloyteam.com/2016/10/interview-ac2016-instructor-lin-guo-shuo-joey/</link>
+		<comments>http://www.alloyteam.com/2016/10/interview-ac2016-instructor-lin-guo-shuo-joey/#comments</comments>
+		<pubDate>Wed, 19 Oct 2016 13:54:11 +0000</pubDate>
+		<dc:creator><![CDATA[TAT.Johnny]]></dc:creator>
+				<category><![CDATA[团队]]></category>
+
+		<guid isPermaLink="false">http://www.alloyteam.com/?p=11372</guid>
+		<description><![CDATA[讲师介绍 郭林烁 joey 腾讯AlloyTeam前端工程师 主要负责了手机 QQ、PC QQ 及花样直播等业 [&#8230;]]]></description>
+		<wfw:commentRss>http://www.alloyteam.com/2016/10/interview-ac2016-instructor-lin-guo-shuo-joey/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+```
+
+**output:**
+
+```json
+{
+   "version": "1.0",
+   "encoding": "UTF-8",
+   "rss": {
+      "version": "2.0",
+      "xmlns-content": "http://purl.org/rss/1.0/modules/content/",
+      "xmlns-wfw": "http://wellformedweb.org/CommentAPI/",
+      "xmlns-dc": "http://purl.org/dc/elements/1.1/",
+      "xmlns-atom": "http://www.w3.org/2005/Atom",
+      "xmlns-sy": "http://purl.org/rss/1.0/modules/syndication/",
+      "xmlns-slash": "http://purl.org/rss/1.0/modules/slash/",
+      "channel": {
+         "title": "Web前端 腾讯AlloyTeam  Blog &#124; 愿景: 成为地球卓越的Web团队！",
+         "atom-link": {
+            "href": "http://www.alloyteam.com/feed/",
+            "rel": "self",
+            "type": "application/rss+xml"
+         },
+         "link": "http://www.alloyteam.com",
+         "description": "腾讯全端 AlloyTeam 团队 Blog",
+         "lastBuildDate": "Fri, 21 Oct 2016 02:45:51 +0000",
+         "language": "zh-CN",
+         "sy-updatePeriod": "hourly",
+         "sy-updateFrequency": "1",
+         "generator": "http://wordpress.org/?v=4.3.1",
+         "item": [
+            {
+               "title": "你所需要知道的AC2016——倒数3天",
+               "link": "http://www.alloyteam.com/2016/10/what-you-need-to-know-ac2016-the-last-3-days/",
+               "comments": "http://www.alloyteam.com/2016/10/what-you-need-to-know-ac2016-the-last-3-days/#comments",
+               "pubDate": "Thu, 20 Oct 2016 12:36:53 +0000",
+               "dc-creator": "TAT.Johnny",
+               "category": "团队",
+               "guid": {
+                  "isPermaLink": "false",
+                  "value": "http://www.alloyteam.com/?p=11383"
+               },
+               "description": "经过了前期踊跃的报名（已超过2000人报名），AC2016即将在10月23日盛大举行。什么，抢不到邀请码？别着 [&#8230;]",
+               "wfw-commentRss": "http://www.alloyteam.com/2016/10/what-you-need-to-know-ac2016-the-last-3-days/feed/",
+               "slash-comments": "2"
+            },
+            {
+               "title": "AC2016讲师专访——郭林烁 joey",
+               "link": "http://www.alloyteam.com/2016/10/interview-ac2016-instructor-lin-guo-shuo-joey/",
+               "comments": "http://www.alloyteam.com/2016/10/interview-ac2016-instructor-lin-guo-shuo-joey/#comments",
+               "pubDate": "Wed, 19 Oct 2016 13:54:11 +0000",
+               "dc-creator": "TAT.Johnny",
+               "category": "团队",
+               "guid": {
+                  "isPermaLink": "false",
+                  "value": "http://www.alloyteam.com/?p=11372"
+               },
+               "description": "讲师介绍 郭林烁 joey 腾讯AlloyTeam前端工程师 主要负责了手机 QQ、PC QQ 及花样直播等业 [&#8230;]",
+               "wfw-commentRss": "http://www.alloyteam.com/2016/10/interview-ac2016-instructor-lin-guo-shuo-joey/feed/",
+               "slash-comments": "1"
             }
          ]
       }
